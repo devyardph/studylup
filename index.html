@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>StudyLup - Level Up Your Learning</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&family=Righteous&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        :root {
+            --primary: #FF6B6B;
+            --primary-dark: #E85555;
+            --accent: #FFE66D;
+            --dark: #1A1A2E;
+            --light: #FFFFFF;
+            --gray: #B8B8D1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #FFFFFF;
+            color: #1A1A2E;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.02;
+            background-image: 
+                radial-gradient(circle at 20% 50%, var(--primary) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, var(--accent) 0%, transparent 50%),
+                radial-gradient(circle at 40% 10%, var(--primary) 0%, transparent 50%);
+            animation: bgFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes bgFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-30px) scale(1.1); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            padding: 1.5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: slideDown 0.8s ease-out;
+            gap: 2rem;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            margin-left: auto;
+            margin-right: 1.5rem;
+        }
+
+        .header-nav a {
+            color: #1A1A2E;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .header-nav a:hover {
+            color: var(--primary);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .logo-text {
+            font-family: 'Righteous', cursive;
+            font-size: 1.75rem;
+            color: #1A1A2E;
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--light);
+            padding: 0.9rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(255, 107, 107, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-btn:hover:before {
+            left: 100%;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(255, 107, 107, 0.5);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 3rem 0 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            animation: fadeIn 1s ease-out 0.2s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-content h1 {
+            font-family: 'Righteous', cursive;
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #1A1A2E 0%, #3E4C7E 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content .highlight {
+            color: var(--primary);
+            -webkit-text-fill-color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-content .highlight:after {
+            content: '';
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            height: 15px;
+            background: var(--accent);
+            opacity: 0.3;
+            z-index: -1;
+            transform: skewY(-2deg);
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: #5A5A7A;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .secondary-btn {
+            background: transparent;
+            color: #1A1A2E;
+            padding: 0.9rem 2rem;
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .secondary-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Phone Mockup */
+        .hero-visual {
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .phone-mockup {
+            width: 300px;
+            height: 600px;
+            background: linear-gradient(135deg, #1A1A2E 0%, #0F0F1E 100%);
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.2),
+                0 0 0 1px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            position: relative;
+            animation: phoneFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes phoneFloat {
+            0%, 100% { transform: translateY(0) rotateY(5deg); }
+            50% { transform: translateY(-20px) rotateY(-5deg); }
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #FF6B6B 0%, #FFE66D 100%);
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 25px;
+            background: #0F0F1E;
+            border-radius: 0 0 15px 15px;
+            z-index: 10;
+        }
+
+        .quiz-card {
+            background: white;
+            border-radius: 25px;
+            padding: 2rem;
+            width: 85%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .quiz-question {
+            color: #1A1A2E;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-family: 'Space Mono', monospace;
+            min-height: 3em;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .quiz-option {
+            background: #F5F5F5;
+            padding: 1rem;
+            border-radius: 15px;
+            color: #1A1A2E;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quiz-option.correct {
+            background: #FF6B6B;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .quiz-option.selected {
+            background: #FF6B6B;
+            color: white;
+        }
+
+        /* Success celebration */
+        .success-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 107, 107, 0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 25px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .success-overlay.active {
+            opacity: 1;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: successPop 0.5s ease-out;
+        }
+
+        @keyframes successPop {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .success-text {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Righteous', cursive;
+        }
+
+        .progress-bar {
+            position: absolute;
+            top: -14px;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #FFE66D;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 2px 8px rgba(255, 230, 109, 0.5);
+        }
+
+        .question-counter {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        /* Floating elements */
+        .float-element {
+            position: absolute;
+            animation: floatAround 8s ease-in-out infinite;
+        }
+
+        @keyframes floatAround {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(10px, -10px) rotate(5deg); }
+            50% { transform: translate(-10px, 10px) rotate(-5deg); }
+            75% { transform: translate(5px, 5px) rotate(3deg); }
+        }
+
+        .star {
+            font-size: 2rem;
+            opacity: 0.3;
+        }
+
+        .star-1 { top: 10%; left: 5%; animation-delay: 0s; }
+        .star-2 { top: 60%; left: 10%; animation-delay: 1s; }
+        .star-3 { top: 20%; right: 15%; animation-delay: 2s; }
+        .star-4 { bottom: 20%; right: 10%; animation-delay: 1.5s; }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 0;
+            animation: fadeIn 1s ease-out 0.4s both;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Righteous', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 2.5rem;
+            background: linear-gradient(135deg, #1A1A2E 0%, #3E4C7E 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: #F8F9FA;
+            border: 1px solid #E8E9EB;
+            padding: 2rem;
+            border-radius: 20px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 107, 0.05), transparent);
+            transition: left 0.6s;
+        }
+
+        .feature-card:hover:before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: #FFFFFF;
+            box-shadow: 0 20px 40px rgba(255, 107, 107, 0.15);
+            border-color: var(--primary);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+            color: var(--primary);
+        }
+
+        .feature-card h3 {
+            font-family: 'Righteous', cursive;
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+        }
+
+        .feature-card p {
+            color: #5A5A7A;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 3rem 0;
+            background: linear-gradient(135deg, #FFF5F5 0%, #FFF9E6 100%);
+            border-radius: 30px;
+            margin: 3rem 0;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item h2 {
+            font-family: 'Righteous', cursive;
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            color: #5A5A7A;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 4rem 0;
+            text-align: center;
+            animation: fadeIn 1s ease-out 0.8s both;
+        }
+
+        .cta-section h2 {
+            font-family: 'Righteous', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            color: #5A5A7A;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .app-badges {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .app-badge {
+            background: #F8F9FA;
+            border: 2px solid var(--primary);
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            color: #1A1A2E;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .app-badge:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid #E8E9EB;
+            color: #5A5A7A;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #1A1A2E;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-links span {
+            color: #5A5A7A;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            header {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .header-nav {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                gap: 1.5rem;
+                padding-top: 1rem;
+                border-top: 1px solid #E8E9EB;
+            }
+
+            .cta-btn {
+                order: 2;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+                padding: 2rem 0 3rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .phone-mockup {
+                width: 260px;
+                height: 520px;
+                padding: 10px;
+            }
+
+            .quiz-card {
+                padding: 1.5rem;
+            }
+
+            .quiz-question {
+                font-size: 1rem;
+            }
+
+            .hero-actions {
+                justify-content: center;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .feature-card {
+                padding: 1.5rem;
+            }
+
+            .feature-icon {
+                font-size: 2.5rem;
+            }
+
+            .stats {
+                padding: 2rem 1rem;
+                margin: 2rem 0;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .stat-item h2 {
+                font-size: 2.5rem;
+            }
+
+            .cta-section {
+                padding: 3rem 0;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+
+            .app-badges {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+
+            .app-badge {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .logo-text {
+                font-size: 1.4rem;
+            }
+
+            .logo img {
+                width: 35px;
+                height: 35px;
+            }
+
+            header {
+                padding: 1rem 0;
+            }
+
+            .header-nav {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .header-nav a {
+                font-size: 0.9rem;
+            }
+
+            .cta-btn {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 0.95rem;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                width: 100%;
+                gap: 1rem;
+            }
+
+            .cta-btn, .secondary-btn {
+                width: 100%;
+            }
+
+            .phone-mockup {
+                width: 240px;
+                height: 480px;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .feature-card h3 {
+                font-size: 1.3rem;
+            }
+
+            .feature-card p {
+                font-size: 0.95rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .stat-item h2 {
+                font-size: 2.5rem;
+            }
+
+            .cta-section h2 {
+                font-size: 1.75rem;
+            }
+
+            .cta-section p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero {
+                padding: 1.5rem 0 2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 1.75rem;
+            }
+
+            .phone-mockup {
+                width: 220px;
+                height: 440px;
+            }
+
+            .feature-icon {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            .stats {
+                padding: 1.5rem 0.75rem;
+                border-radius: 20px;
+            }
+
+            .stat-item h2 {
+                font-size: 2rem;
+            }
+
+            .stat-item p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="studylup-logo.png" alt="StudyLup Logo">
+                <span class="logo-text">StudyLup</span>
+            </div>
+            <nav class="header-nav">
+                <a href="#features">Features</a>
+                <a href="privacy-policy.html">Privacy</a>
+                <a href="terms-of-service.html">Terms</a>
+            </nav>
+            <a href="#download" class="cta-btn">Download Now</a>
+        </header>
+
+        <section class="hero">
+            <div class="float-element star star-1">✨</div>
+            <div class="float-element star star-2">⭐</div>
+            <div class="float-element star star-3">✨</div>
+            <div class="float-element star star-4">⭐</div>
+
+            <div class="hero-content">
+                <h1>
+                    <span class="highlight">Level Up</span><br>
+                    Your Learning<br>
+                    Journey
+                </h1>
+                <p>
+                    Transform boring study sessions into addictive quiz battles. 
+                    Master any subject with smart quizzes, track your progress, 
+                    and compete with learners worldwide.
+                </p>
+                <div class="hero-actions">
+                    <a href="#download" class="cta-btn">Start Learning Free</a>
+                    <a href="#features" class="secondary-btn">See How It Works</a>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="phone-notch"></div>
+                        <div class="quiz-card" id="quizCard">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                            <span class="question-counter" id="questionCounter">1/5</span>
+                            <div class="quiz-question" id="quizQuestion">
+                                What's the capital of France?
+                            </div>
+                            <div class="quiz-options" id="quizOptions">
+                                <div class="quiz-option" data-answer="false">A) London</div>
+                                <div class="quiz-option" data-answer="true">B) Paris</div>
+                                <div class="quiz-option" data-answer="false">C) Berlin</div>
+                                <div class="quiz-option" data-answer="false">D) Madrid</div>
+                            </div>
+                            <div class="success-overlay" id="successOverlay">
+                                <div class="success-icon">🎉</div>
+                                <div class="success-text">Correct!</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script>
+            // Quiz animation logic
+            const quizQuestions = [
+                {
+                    question: "What's the capital of France?",
+                    options: [
+                        { text: "A) London", correct: false },
+                        { text: "B) Paris", correct: true },
+                        { text: "C) Berlin", correct: false },
+                        { text: "D) Madrid", correct: false }
+                    ]
+                },
+                {
+                    question: "What is 7 × 8?",
+                    options: [
+                        { text: "A) 54", correct: false },
+                        { text: "B) 56", correct: true },
+                        { text: "C) 63", correct: false },
+                        { text: "D) 48", correct: false }
+                    ]
+                },
+                {
+                    question: "Who painted the Mona Lisa?",
+                    options: [
+                        { text: "A) Michelangelo", correct: false },
+                        { text: "B) Leonardo da Vinci", correct: true },
+                        { text: "C) Raphael", correct: false },
+                        { text: "D) Donatello", correct: false }
+                    ]
+                },
+                {
+                    question: "What is the chemical symbol for gold?",
+                    options: [
+                        { text: "A) Go", correct: false },
+                        { text: "B) Gd", correct: false },
+                        { text: "C) Au", correct: true },
+                        { text: "D) Ag", correct: false }
+                    ]
+                },
+                {
+                    question: "What is the largest planet in our solar system?",
+                    options: [
+                        { text: "A) Saturn", correct: false },
+                        { text: "B) Jupiter", correct: true },
+                        { text: "C) Neptune", correct: false },
+                        { text: "D) Uranus", correct: false }
+                    ]
+                }
+            ];
+
+            let currentQuestion = 0;
+            let isAnimating = false;
+
+            function updateQuestion() {
+                const questionEl = document.getElementById('quizQuestion');
+                const optionsEl = document.getElementById('quizOptions');
+                const counterEl = document.getElementById('questionCounter');
+                const progressEl = document.getElementById('progressFill');
+
+                const question = quizQuestions[currentQuestion];
+                
+                // Update question text
+                questionEl.style.opacity = '0';
+                setTimeout(() => {
+                    questionEl.textContent = question.question;
+                    questionEl.style.opacity = '1';
+                }, 300);
+
+                // Update options
+                optionsEl.style.opacity = '0';
+                setTimeout(() => {
+                    optionsEl.innerHTML = '';
+                    question.options.forEach(option => {
+                        const optionDiv = document.createElement('div');
+                        optionDiv.className = 'quiz-option';
+                        optionDiv.textContent = option.text;
+                        optionDiv.dataset.answer = option.correct;
+                        optionsEl.appendChild(optionDiv);
+                    });
+                    optionsEl.style.opacity = '1';
+                }, 300);
+
+                // Update counter
+                counterEl.textContent = `${currentQuestion + 1}/5`;
+
+                // Update progress
+                progressEl.style.width = `${((currentQuestion + 1) / 5) * 100}%`;
+            }
+
+            function showSuccess() {
+                const overlay = document.getElementById('successOverlay');
+                overlay.classList.add('active');
+                
+                setTimeout(() => {
+                    overlay.classList.remove('active');
+                }, 1000);
+            }
+
+            function selectCorrectAnswer() {
+                if (isAnimating) return;
+                isAnimating = true;
+
+                const options = document.querySelectorAll('.quiz-option');
+                let correctOption = null;
+
+                options.forEach(option => {
+                    if (option.dataset.answer === 'true') {
+                        correctOption = option;
+                    }
+                });
+
+                // Highlight correct answer
+                if (correctOption) {
+                    correctOption.classList.add('correct');
+                }
+
+                // Move to next question (removed success overlay)
+                setTimeout(() => {
+                    currentQuestion = (currentQuestion + 1) % quizQuestions.length;
+                    updateQuestion();
+                    isAnimating = false;
+                }, 2000);
+            }
+
+            // Auto-play quiz animation
+            setInterval(selectCorrectAnswer, 4000);
+
+            // Initialize with smooth transitions
+            const questionEl = document.getElementById('quizQuestion');
+            const optionsEl = document.getElementById('quizOptions');
+            questionEl.style.transition = 'opacity 0.3s ease';
+            optionsEl.style.transition = 'opacity 0.3s ease';
+        </script>
+
+        <section class="stats">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h2>500K+</h2>
+                    <p>Active Learners</p>
+                </div>
+                <div class="stat-item">
+                    <h2>10M+</h2>
+                    <p>Quizzes Completed</p>
+                </div>
+                <div class="stat-item">
+                    <h2>50+</h2>
+                    <p>Subject Categories</p>
+                </div>
+                <div class="stat-item">
+                    <h2>4.8★</h2>
+                    <p>App Store Rating</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <h2 class="section-title">Why StudyLup?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="bi bi-bullseye feature-icon"></i>
+                    <h3>Smart Quizzes</h3>
+                    <p>
+                        AI-powered questions that adapt to your learning level. 
+                        Each quiz gets smarter as you progress, focusing on areas 
+                        where you need the most practice.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="bi bi-graph-up-arrow feature-icon"></i>
+                    <h3>Track Progress</h3>
+                    <p>
+                        Visualize your learning journey with detailed analytics. 
+                        See your strengths, weaknesses, and improvement over time 
+                        with beautiful charts and insights.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="bi bi-trophy-fill feature-icon"></i>
+                    <h3>Compete & Win</h3>
+                    <p>
+                        Challenge friends or join global leaderboards. Earn badges, 
+                        unlock achievements, and show off your knowledge with 
+                        competitive quiz battles.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="bi bi-book-fill feature-icon"></i>
+                    <h3>Endless Topics</h3>
+                    <p>
+                        From math to history, science to languages. Explore 
+                        thousands of curated quizzes across 50+ categories, 
+                        or create your own custom study sets.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="bi bi-lightning-charge-fill feature-icon"></i>
+                    <h3>Quick Sessions</h3>
+                    <p>
+                        Perfect for busy schedules. Study in focused 5-minute 
+                        bursts or marathon sessions. Your progress saves 
+                        automatically wherever you stop.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="bi bi-clock-fill feature-icon"></i>
+                    <h3>Study Anytime</h3>
+                    <p>
+                        Works offline, syncs everywhere. Download quizzes 
+                        for offline access and pick up exactly where you left 
+                        off on any device.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section" id="download">
+            <h2>Ready to Level Up?</h2>
+            <p>
+                Join over 500,000 learners already crushing their goals with StudyLup. 
+                Download now and get your first week of premium features free!
+            </p>
+            <a href="#" class="cta-btn" style="font-size: 1.2rem; padding: 1.2rem 3rem;">
+                Get Started Free
+            </a>
+            <div class="app-badges">
+                <a href="#" class="app-badge">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+                    </svg>
+                    App Store
+                </a>
+                <a href="#" class="app-badge">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                    </svg>
+                    Google Play
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-links">
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <span>•</span>
+                <a href="terms-of-service.html">Terms of Service</a>
+                <span>•</span>
+                <a href="/cdn-cgi/l/email-protection#d9aaaca9a9b6abad99aaadacbda0b5aca9f7bab6b4">Contact Us</a>
+            </div>
+            <p>&copy; 2026 StudyLup. All rights reserved. Level up your learning today.</p>
+ 
